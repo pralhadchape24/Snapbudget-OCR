@@ -4,50 +4,87 @@
 
 ![Android](https://img.shields.io/badge/Android-34A853?style=for-the-badge&logo=android)
 ![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin)
-![Room](https://img.shields.io/badge/Room-Database-blue?style=for-the-badge)
-![ML Kit OCR](https://img.shields.io/badge/ML%20Kit-OCR-orange?style=for-the-badge)
+![Room](https://img.shields.io/badge/Room-Database-1565C0?style=for-the-badge)
+![ML Kit](https://img.shields.io/badge/Google%20ML%20Kit-OCR-4285F4?style=for-the-badge&logo=google)
+![Material Design](https://img.shields.io/badge/Material%20Design-UI-6200EE?style=for-the-badge)
 
 </p>
 
 <p align="center">
-An Android application that scans receipts using OCR, extracts transaction details, categorizes expenses, and helps users manage their personal budget efficiently.
+An Android application that uses Optical Character Recognition (OCR) to scan receipts, automatically extract expense details, categorize transactions, and help users manage personal finances efficiently.
 </p>
 
 ---
 
 # 📖 Overview
 
-SnapBudget OCR is an Android application developed in Kotlin that simplifies expense tracking by scanning receipts using Optical Character Recognition (OCR). The application automatically extracts important information such as merchant name, total amount, and transaction date, then stores and categorizes the expense for easy financial management.
+**SnapBudget OCR** is an Android application developed using **Kotlin** that simplifies expense management by scanning receipts using **Google ML Kit OCR**. The application extracts key information such as merchant name, transaction date, and total amount, then stores the data securely in a local **Room Database**.
+
+The project minimizes manual data entry while providing an intuitive interface for organizing and tracking daily expenses.
 
 ---
 
 # ✨ Features
 
-### 📷 Receipt Scanning
+## 📷 Receipt Scanning
 
-- Capture receipt images
-- OCR-based text extraction
-- Automatic transaction detection
+- Scan receipts using OCR
+- Capture or upload receipt images
+- Automatic text extraction
+- Fast and accurate recognition
 
-### 💰 Expense Management
+## 💰 Expense Management
 
-- Store transactions
-- Expense categorization
-- Transaction history
-- Budget tracking
+- Automatic expense entry
+- Edit extracted information
+- Delete transactions
+- View expense history
 
-### 📊 Smart Analysis
+## 📂 Expense Categorization
 
-- Category classification
-- Confidence estimation
+- Organize expenses
+- Category management
+- Transaction tracking
+
+## 📊 Analytics
+
 - Expense summaries
+- Category-wise spending
+- Budget monitoring
+- Spending insights
 
-### 📱 Android Features
+## 📱 User Experience
 
-- Modern Material Design UI
-- Local Room Database
-- Fast offline storage
-- Secure data handling
+- Material Design interface
+- Offline functionality
+- Responsive UI
+- Local database storage
+
+---
+
+# 📸 Screenshots
+
+## Application Screens
+
+| Home Screen | Receipt Scanner |
+|-------------|-----------------|
+| ![](images/1.jpeg) | ![](images/2.jpeg) |
+
+| Expense Details | Expense History |
+|-----------------|-----------------|
+| ![](images/4.jpeg) | ![](images/5.jpeg) |
+
+| Dashboard |
+|-----------|
+| ![](images/6.jpeg) |
+
+---
+
+# 🔄 Project Workflow
+
+<p align="center">
+<img src="images/pipeline.jpeg" width="850" alt="Project Workflow">
+</p>
 
 ---
 
@@ -57,9 +94,39 @@ SnapBudget OCR is an Android application developed in Kotlin that simplifies exp
 |------------|---------|
 | Kotlin | Android Development |
 | Android Studio | IDE |
+| Google ML Kit OCR | Text Recognition |
 | Room Database | Local Storage |
-| ML Kit OCR | Text Recognition |
 | Jetpack Components | Android Architecture |
+| Material Design | UI Design |
+
+---
+
+# 🏗 Architecture
+
+```text
+                User
+                  │
+                  ▼
+         Android Application
+                  │
+                  ▼
+        Capture / Upload Receipt
+                  │
+                  ▼
+         Google ML Kit OCR
+                  │
+                  ▼
+      Extract Receipt Information
+                  │
+                  ▼
+     Merchant • Amount • Date
+                  │
+                  ▼
+         Room Database Storage
+                  │
+                  ▼
+      Expense Dashboard & History
+```
 
 ---
 
@@ -73,6 +140,14 @@ SnapBudget-OCR/
 │   ├── build.gradle.kts
 │   └── proguard-rules.pro
 │
+├── images/
+│   ├── 1.jpeg
+│   ├── 2.jpeg
+│   ├── 4.jpeg
+│   ├── 5.jpeg
+│   ├── 6.jpeg
+│   └── pipeline.jpeg
+│
 ├── Receipt Tests/
 ├── Logs Testing/
 ├── README.md
@@ -83,53 +158,95 @@ SnapBudget-OCR/
 
 # 🚀 Installation
 
-Clone the repository
+## Clone the Repository
 
 ```bash
 git clone https://github.com/pralhadchape24/snapbudget-ocr.git
 ```
 
-Open the project in **Android Studio**.
+```bash
+cd SnapBudget-OCR
+```
 
-Sync Gradle dependencies.
+## Open in Android Studio
 
-Run the application on an emulator or Android device.
+Open the project using **Android Studio**.
+
+## Sync Gradle
+
+Allow Gradle to download and sync all dependencies.
+
+## Run the Application
+
+- Connect an Android device or start an emulator.
+- Click **Run ▶** in Android Studio.
 
 ---
 
-# 📌 Key Features
+# 📌 Core Functionalities
 
-- OCR Receipt Scanner
-- Expense Tracking
-- Automatic Category Detection
-- Transaction Management
-- Room Database
-- Offline Support
-- Android Material UI
+- OCR-Based Receipt Scanning
+- Automatic Expense Extraction
+- Expense Categorization
+- Transaction History
+- Room Database Integration
+- Offline Expense Tracking
+- Budget Management
 
 ---
 
-# 🎯 Learning Outcomes
+# 📚 Learning Outcomes
 
-- Android Development
-- Kotlin Programming
+This project demonstrates:
+
+- Android Development with Kotlin
+- Google ML Kit OCR Integration
 - Room Database
-- OCR Integration
-- MVVM Architecture
-- Mobile UI Design
+- Jetpack Components
+- Material Design
+- Mobile UI Development
+- Local Data Persistence
 
 ---
 
 # 🔮 Future Enhancements
 
-- Cloud Backup
 - Firebase Authentication
-- Expense Analytics Dashboard
+- Cloud Backup & Synchronization
+- AI-Based Expense Categorization
 - Monthly Budget Reports
 - PDF & Excel Export
-- Multi-language Receipt Recognition
 - Dark Mode
+- Multi-language OCR Support
 - Currency Conversion
+- Expense Analytics Dashboard
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository.
+2. Create a feature branch:
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes:
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to your branch:
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request.
 
 ---
 
@@ -137,8 +254,19 @@ Run the application on an emulator or Android device.
 
 **Pralhad Shivaji Chape**
 
-B.Tech Computer Engineering
+🎓 B.Tech Computer Engineering  
+🏫 Vishwakarma Institute of Technology (VIT), Pune
 
-Vishwakarma Institute of Technology (VIT), Pune
+**GitHub:** https://github.com/pralhadchape24
 
-GitHub: https://github.com/pralhadchape24
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a **⭐ Star** on GitHub.
+
+---
+
+<p align="center">
+Made with ❤️ using <b>Kotlin</b>, <b>Android Studio</b>, <b>Google ML Kit OCR</b>, and <b>Room Database</b>.
+</p>
