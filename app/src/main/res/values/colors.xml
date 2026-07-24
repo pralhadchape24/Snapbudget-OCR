@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── CORE PALETTE — Dark System ── -->
+    <!-- Surface Layers (Elevation) -->
+    <color name="bg_abyss">#090C12</color>
+    <color name="bg_base">#0F1117</color>
+    <color name="bg_surface">#161B24</color>
+    <color name="bg_elevated">#1E2535</color>
+    <color name="bg_overlay">#252D3D</color>
+
+    <!-- Borders -->
+    <color name="border_subtle">#12FFFFFF</color>
+    <color name="border_soft">#1FFFFFFF</color>
+
+    <!-- Translucent Overlay / Dimmed -->
+    <color name="bg_abyss_alpha_60">#99090C12</color>
+    <color name="bg_abyss_alpha_40">#66090C12</color>
+    <color name="black_alpha_60">#99000000</color>
+
+    <!-- Text -->
+    <color name="text_primary">#EEF0F4</color>
+    <color name="text_secondary">#8E97AA</color>
+    <color name="text_tertiary">#8899AA</color>
+
+    <!-- ── BRAND — Electric Teal-Green ── -->
+    <color name="brand">#00D68F</color>
+    <color name="brand_dim">#00A86B</color>
+    <color name="brand_glow">#2E00D68F</color>
+    <color name="brand_subtle">#1400D68F</color>
+    <color name="brand_alpha_20">#3300D68F</color>
+    <color name="brand_alpha_70">#B300D68F</color>
+    <color name="on_brand">#000000</color>
+
+    <!-- ── SEMANTIC ── -->
+    <color name="positive">#00D68F</color>
+    <color name="warning">#FFB547</color>
+    <color name="danger">#FF6B6B</color>
+    <color name="info">#5B8DEF</color>
+
+    <color name="positive_bg">#1A00D68F</color>
+    <color name="warning_bg">#1AFFB547</color>
+    <color name="danger_bg">#1AFF6B6B</color>
+    <color name="info_bg">#1A5B8DEF</color>
+
+    <color name="bg_monthly_card">#1A2E24</color>
+
+    <!-- ── CATEGORY COLORS ── -->
+    <color name="cat_grocery">#4CAF50</color>
+    <color name="cat_food">#FFB547</color>
+    <color name="cat_travel">#5B8DEF</color>
+    <color name="cat_shopping">#EC4899</color>
+    <color name="cat_utilities">#8B5CF6</color>
+    <color name="cat_entertainment">#FF6B6B</color>
+    <color name="cat_health">#00D68F</color>
+    <color name="cat_education">#06B6D4</color>
+    <color name="cat_others">#525E72</color>
+
+    <!-- ── LEGACY / COMPAT ── -->
+    <color name="primary">#00D68F</color>
+    <color name="primary_variant">#00A86B</color>
+    <color name="primary_dark">#008F5E</color>
+    <color name="primary_light">#33FFAD</color>
+    <color name="on_primary">#000000</color>
+    <color name="secondary">#5B8DEF</color>
+    <color name="on_secondary">#000000</color>
+    <color name="background">#0F1117</color>
+    <color name="surface">#161B24</color>
+    <color name="on_surface">#EEF0F4</color>
+    <color name="surface_variant">#1E2535</color>
+    <color name="error">#FF6B6B</color>
+    <color name="success">#00D68F</color>
+    <color name="divider">#12FFFFFF</color>
+
+    <color name="purple_200">#A5B4FC</color>
+    <color name="purple_500">#00D68F</color>
+    <color name="purple_700">#00A86B</color>
+    <color name="teal_200">#99F6E4</color>
+    <color name="teal_700">#00A86B</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>

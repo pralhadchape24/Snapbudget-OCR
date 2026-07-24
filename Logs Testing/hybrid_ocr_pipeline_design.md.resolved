@@ -1,0 +1,166 @@
+# Hybrid OCR Pipeline Design — SnapBudget
+
+## Understanding Summary
+
+- **What**: A 3-mode OCR pipeline for receipt scanning in the SnapBudget Android app
+- **Why**: Gives users control over privacy/accuracy tradeoff; enables offline-first with optional AI enhancement
+- **Who**: SnapBudget users scanning Indian retail receipts
+- **Current state**: ML Kit OCR + regex parsing + Gemini AI fallback (hardcoded, always-on when confidence < 0.6)
+- **Constraint**: Android (Kotlin), must keep existing [OcrProcessor](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/OcrProcessor.kt#14-80), [ReceiptParser](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptParser.kt#56-912), `ReceiptTypeClassifier` intact
+
+## Three Modes
+
+| Mode | OCR Engine | Parsing | Categorization | Network |
+|------|-----------|---------|---------------|---------|
+| **1 — Offline** | ML Kit (on-device) | [ReceiptParser](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptParser.kt#56-912) regex | `ReceiptTypeClassifier` TF-IDF | None |
+| **2 — Hybrid** | ML Kit (on-device) | [ReceiptParser](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptParser.kt#56-912) regex | Groq AI for category + word correction | API call |
+| **3 — Cloud AI** | Groq Vision API | Groq AI parses full receipt | Groq AI categorization | API call |
+
+## Architecture
+
+```
+┌──────────────────────────────────────────────────────┐
+│                  OcrPipelineMode (enum)               │
+│          OFFLINE / HYBRID / CLOUD_AI                  │
+└──────────────┬───────────────────────────────────────┘
+               │
+┌──────────────▼───────────────────────────────────────┐
+│              OcrPipelineConfig (object)               │
+│   - reads mode from SharedPreferences                │
+│   - reads GROQ_API_KEY from BuildConfig (.env)       │
+│   - validates: if no key → force OFFLINE             │
+└──────────────┬───────────────────────────────────────┘
+               │
+┌──────────────▼───────────────────────────────────────┐
+│           ReceiptProcessor (modified)                 │
+│                                                       │
+│  switch (mode) {                                     │
+│    OFFLINE →                                         │
+│      OcrProcessor(ML Kit) → ReceiptParser → done     │
+│                                                       │
+│    HYBRID →                                          │
+│      OcrProcessor(ML Kit) → ReceiptParser            │
+│      → GroqAiService.correctAndCategorize(rawText)   │
+│      → merge AI results with parsed receipt          │
+│                                                       │
+│    CLOUD_AI →                                        │
+│      GroqAiService.ocrAndParse(imageBytes)           │
+│      → returns fully parsed receipt from AI          │
+│  }                                                   │
+└──────────────────────────────────────────────────────┘
+```
+
+## Switching Logic
+
+```kotlin
+// In ReceiptProcessor.processOcrResult()
+when (OcrPipelineConfig.getMode(context)) {
+    OFFLINE -> {
+        // Current flow minus Gemini fallback
+        // ReceiptParser + ReceiptTypeClassifier only
+    }
+    HYBRID -> {
+        // Current flow, but replace Gemini with GroqAiService
+        // AI called only when confidence < 0.6 or fields missing
+        // AI corrects merchant names, amounts, and assigns category
+    }
+    CLOUD_AI -> {
+        // Skip ML Kit entirely
+        // Send image to Groq Vision API
+        // AI returns structured JSON: merchant, amount, date, category, GST
+    }
+}
+```
+
+**Fallback rule**: If API call fails in HYBRID/CLOUD_AI → degrade to OFFLINE result silently.
+
+## Groq AI Integration
+
+### API Key Storage
+
+```properties
+# .env file (project root, gitignored)
+GROQ_API_KEY=gsk_xxxxxxxxxxxx
+```
+
+```kotlin
+// build.gradle.kts — inject into BuildConfig
+android {
+    defaultConfig {
+        val envFile = rootProject.file(".env")
+        val groqKey = if (envFile.exists()) {
+            envFile.readLines()
+                .firstOrNull { it.startsWith("GROQ_API_KEY=") }
+                ?.substringAfter("=")?.trim() ?: ""
+        } else ""
+        buildConfigField("String", "GROQ_API_KEY", "\"$groqKey\"")
+    }
+    buildFeatures { buildConfig = true }
+}
+```
+
+### GroqAiService (new file, replaces GenerativeAiFallbackService)
+
+```kotlin
+// com.snapbudget.ocr.ocr.GroqAiService
+class GroqAiService {
+    private val apiKey = BuildConfig.GROQ_API_KEY
+    private val endpoint = "https://api.groq.com/openai/v1/chat/completions"
+    private val model = "llama-3.3-70b-versatile"  // text tasks
+    private val visionModel = "llama-4-scout-17b-16e-instruct"  // vision tasks
+
+    // HYBRID mode: correct OCR text + categorize
+    suspend fun correctAndCategorize(rawOcrText: String): AiResult?
+
+    // CLOUD_AI mode: full receipt OCR from image
+    suspend fun ocrAndParse(imageBase64: String): AiResult?
+
+    data class AiResult(
+        val merchantName: String?,
+        val totalAmount: Double?,
+        val date: String?,
+        val gstNumber: String?,
+        val category: String?,
+        val confidence: Float
+    )
+}
+```
+
+### HTTP Implementation
+
+Uses `java.net.HttpURLConnection` (no new dependencies):
+
+```kotlin
+private suspend fun callGroq(messages: List<Map<String, Any>>): String? =
+    withContext(Dispatchers.IO) {
+        val conn = URL(endpoint).openConnection() as HttpURLConnection
+        conn.requestMethod = "POST"
+        conn.setRequestProperty("Authorization", "Bearer $apiKey")
+        conn.setRequestProperty("Content-Type", "application/json")
+        conn.doOutput = true
+        // ... write JSON body, read response, parse content
+    }
+```
+
+## Decision Log
+
+| Decision | Why |
+|----------|-----|
+| Groq over Gemini | User-requested; fast inference, free tier available |
+| `HttpURLConnection` over OkHttp | Zero new dependencies |
+| SharedPreferences for mode | Already used (CategoryClassifier), simple toggle |
+| BuildConfig for API key | Standard Android pattern, keeps key out of source |
+| Silent fallback to OFFLINE | User should never see a broken scan |
+| Keep existing parsers intact | Mode 1 & 2 still depend on them; proven accuracy |
+
+## Files to Create/Modify
+
+| File | Action |
+|------|--------|
+| `.env` | **Create** — `GROQ_API_KEY=` |
+| `.gitignore` | **Add** `.env` |
+| [app/build.gradle.kts](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/build.gradle.kts) | **Modify** — read `.env`, add `buildConfigField`, enable `buildConfig` |
+| `OcrPipelineMode.kt` | **Create** — enum + config object |
+| `GroqAiService.kt` | **Create** — replaces [GenerativeAiFallbackService](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/GenerativeAiFallbackService.kt#8-70) |
+| [ReceiptProcessor.kt](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptProcessor.kt) | **Modify** — switch on mode, integrate `GroqAiService` |
+| Settings UI (future) | Toggle between 3 modes in Profile/Settings |

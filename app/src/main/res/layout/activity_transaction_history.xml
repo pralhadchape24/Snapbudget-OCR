@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_base">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Transaction History"
+            app:titleTextColor="@color/text_primary"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- Filters Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_4"
+            android:layout_marginTop="@dimen/spacing_1"
+            android:layout_marginBottom="@dimen/spacing_2"
+            app:cardCornerRadius="@dimen/radius_lg"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/bg_elevated"
+            app:strokeColor="@color/border_subtle"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_3_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filters"
+                    android:fontFamily="monospace"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="10sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.14" />
+
+                <!-- Material Exposed Dropdown -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilFilterCategory"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_2_5"
+                    android:hint="@string/category"
+                    app:boxCornerRadiusTopStart="@dimen/spacing_2_5"
+                    app:boxCornerRadiusTopEnd="@dimen/spacing_2_5"
+                    app:boxCornerRadiusBottomStart="@dimen/spacing_2_5"
+                    app:boxCornerRadiusBottomEnd="@dimen/spacing_2_5"
+                    app:boxStrokeColor="@color/border_soft"
+                    app:hintTextColor="@color/text_tertiary">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/spinnerFilterCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_primary"
+                        android:contentDescription="@string/category" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/spacing_2_5">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFilterDateFrom"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/spacing_1_5"
+                        android:text="@string/from_date"
+                        android:textSize="11sp"
+                        android:textColor="@color/text_secondary"
+                        app:cornerRadius="@dimen/spacing_2_5"
+                        app:strokeColor="@color/border_soft" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFilterDateTo"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/spacing_1_5"
+                        android:text="@string/to_date"
+                        android:textSize="11sp"
+                        android:textColor="@color/text_secondary"
+                        app:cornerRadius="@dimen/spacing_2_5"
+                        app:strokeColor="@color/border_soft" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnClearFilters"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clear_filters"
+                        android:textSize="11sp"
+                        android:textColor="@color/brand" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Total Amount -->
+        <TextView
+            android:id="@+id/tvTotalAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="@dimen/spacing_2"
+            android:text="Total: ₹0.00"
+            android:fontFamily="monospace"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/brand" />
+
+        <!-- Empty State -->
+        <TextView
+            android:id="@+id/tvEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/spacing_12"
+            android:text="No transactions found"
+            android:textColor="@color/text_tertiary"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <!-- Transactions List -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/spacing_4"
+            android:clipToPadding="false" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_dialog"
+        android:paddingTop="@dimen/spacing_3"
+        android:paddingBottom="@dimen/spacing_6"
+        android:paddingHorizontal="@dimen/spacing_6">
+
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_dialog_handle"
+            android:layout_marginBottom="@dimen/spacing_5" />
+
+        <!-- Icon Header -->
+        <FrameLayout
+            android:layout_width="@dimen/fab_size"
+            android:layout_height="@dimen/fab_size"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_icon_info"
+            android:layout_marginBottom="@dimen/spacing_4">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_receipt_long"
+                app:tint="@color/info"
+                android:importantForAccessibility="no" />
+        </FrameLayout>
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/dialog_manual_title"
+            android:textAppearance="@style/TextAppearance.SnapBudget.Headline2"
+            android:layout_marginBottom="@dimen/spacing_1" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/dialog_manual_subtitle"
+            android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall"
+            android:textColor="@color/text_tertiary"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/spacing_6" />
+
+        <!-- Merchant / Description Field -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_manual_merchant_label"
+            android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+            android:layout_marginBottom="@dimen/spacing_2" />
+
+        <EditText
+            android:id="@+id/etMerchant"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_min_height"
+            android:inputType="textCapWords"
+            android:hint="@string/dialog_manual_merchant_hint"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary"
+            android:textSize="14sp"
+            android:background="@drawable/bg_input_field"
+            android:paddingHorizontal="@dimen/spacing_4"
+            android:maxLines="1"
+            android:imeOptions="actionNext"
+            android:layout_marginBottom="@dimen/spacing_4" />
+
+        <!-- Amount Field -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_manual_amount_label"
+            android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+            android:layout_marginBottom="@dimen/spacing_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_input_field"
+            android:paddingHorizontal="@dimen/spacing_4"
+            android:layout_marginBottom="@dimen/spacing_4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹"
+                android:textSize="20sp"
+                android:textColor="@color/brand"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:layout_marginEnd="@dimen/spacing_2" />
+
+            <EditText
+                android:id="@+id/etAmount"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/list_item_min_height"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:hint="@string/dialog_manual_amount_hint"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_tertiary"
+                android:textSize="18sp"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:background="@android:color/transparent"
+                android:maxLines="1"
+                android:imeOptions="actionNext" />
+        </LinearLayout>
+
+        <!-- Category Selector -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_manual_category_label"
+            android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+            android:layout_marginBottom="@dimen/spacing_2" />
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_min_height"
+            android:background="@drawable/bg_input_field"
+            android:paddingHorizontal="@dimen/spacing_4"
+            android:popupBackground="@color/bg_overlay"
+            android:layout_marginBottom="@dimen/spacing_4" />
+
+        <!-- Date Field -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_manual_date_label"
+            android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+            android:layout_marginBottom="@dimen/spacing_2" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_min_height"
+            android:gravity="center_vertical"
+            android:hint="@string/dialog_manual_date_hint"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary"
+            android:textSize="14sp"
+            android:background="@drawable/bg_input_field"
+            android:paddingHorizontal="@dimen/spacing_4"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="@dimen/spacing_4" />
+
+        <!-- Notes Field (Optional) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_manual_notes_label"
+            android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+            android:layout_marginBottom="@dimen/spacing_2" />
+
+        <EditText
+            android:id="@+id/etNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/list_item_min_height"
+            android:inputType="textMultiLine|textCapSentences"
+            android:hint="@string/dialog_manual_notes_hint"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary"
+            android:textSize="14sp"
+            android:background="@drawable/bg_input_field"
+            android:paddingHorizontal="@dimen/spacing_4"
+            android:paddingVertical="@dimen/spacing_3"
+            android:gravity="top"
+            android:maxLines="3"
+            android:layout_marginBottom="@dimen/spacing_6" />
+
+        <!-- Save Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveBill"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:text="@string/dialog_manual_save"
+            android:textColor="@color/on_brand"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:backgroundTint="@color/brand"
+            app:cornerRadius="@dimen/radius_lg"
+            android:layout_marginBottom="@dimen/spacing_3" />
+
+        <!-- Cancel Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancelBill"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:text="@string/cancel"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            app:cornerRadius="@dimen/radius_lg" />
+
+    </LinearLayout>
+</ScrollView>

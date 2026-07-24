@@ -1,0 +1,311 @@
+{
+    "1.jpg": {
+        "merchant_name": "McDonald's Toa Payoh Central",
+        "address": "600 @ Toa Payoh #01-02, Singapore 319515",
+        "phone": "62596362",
+        "company": "McDonald's Restaurants Pte Ltd",
+        "gst_registration_no": "M2-0023981-4",
+        "invoice_no": "002201330026",
+        "order_no": "57",
+        "register_no": "1",
+        "date": "13/01/2016",
+        "time": "15:49:52",
+        "items": [
+            {
+                "name": "Med Ice Lemon Tea",
+                "quantity": 1,
+                "amount": 2.95
+            },
+            {
+                "name": "Coffee with Milk",
+                "quantity": 1,
+                "amount": 2.4
+            }
+        ],
+        "total": 5.35,
+        "cash_tendered": 10.0,
+        "change": 4.65,
+        "gst_included": 0.35,
+        "currency": "SGD"
+    },
+    "2.jpg": {
+        "merchant_name": "Saathimart.com",
+        "company": "Khileshwori Trading Pvt. Ltd.",
+        "address": "Narephat, Kathmandu",
+        "vat_no": "610282856",
+        "bill_no": "SI37482-NKT-80/81",
+        "date": "07/05/2024",
+        "mti": "21/03/2081",
+        "payment_mode": "Cash",
+        "items": [
+            {
+                "name": "COLGATE DENTAL",
+                "quantity": 1,
+                "rate": 95,
+                "amount": 95
+            },
+            {
+                "name": "PATANJALI ANTI",
+                "quantity": 1,
+                "rate": 70,
+                "amount": 70
+            },
+            {
+                "name": "GODREJ NO 1 SOAP",
+                "quantity": 1,
+                "rate": 20,
+                "amount": 20
+            }
+        ],
+        "gross_amount": 185.0,
+        "discount": 0.0,
+        "total": 185.0,
+        "tender": 185.0,
+        "change": 0.0,
+        "currency": "NPR"
+    },
+    "3.jpeg": {
+        "merchant_name": "Main Street Restaurant",
+        "address": "6332 Business Drive, Suite 528, Palo Alto, California 94301",
+        "phone": "575-1628095",
+        "date": "04/07/2017",
+        "time": "11:36 AM",
+        "merchant_id": "9hqjxvufdr",
+        "terminal_id": "11111",
+        "transaction_id": "#e6d598ef",
+        "type": "CREDIT",
+        "card_entry_mode": "Swiped",
+        "card_type": "DISCOVER",
+        "approval_code": "819543",
+        "subtotal": 25.23,
+        "tip": 3.78,
+        "total": 29.01,
+        "currency": "USD"
+    },
+    "4.jpg": {
+        "merchant_name": "Cash Receipt",
+        "address": "1234 Lorem Ipsum, Dolor",
+        "phone": "123-456-7890",
+        "date": "01/01/2018",
+        "time": "10:35",
+        "items": [
+            {
+                "name": "Lorem",
+                "amount": 6.5
+            },
+            {
+                "name": "Ipsum",
+                "amount": 7.5
+            },
+            {
+                "name": "Dolor Sit",
+                "amount": 48.0
+            },
+            {
+                "name": "Amet",
+                "amount": 9.3
+            },
+            {
+                "name": "Consectetur",
+                "amount": 11.9
+            },
+            {
+                "name": "Adipiscing Elit",
+                "amount": 1.2
+            },
+            {
+                "name": "Sed Do",
+                "amount": 0.4
+            }
+        ],
+        "subtotal": 76.8,
+        "sales_tax": 8.0,
+        "total": 84.8,
+        "currency": "USD"
+    },
+    "5.jpeg": {
+        "merchant_name": "Apoorva Delicacies",
+        "address": "Dadar (W), Mumbai",
+        "date": "16/01/2022",
+        "bill_no": "301",
+        "items": [
+            {
+                "name": "MEDU WADA",
+                "qty": 1,
+                "rate": 65,
+                "amount": 65
+            },
+            {
+                "name": "SADA DOSA",
+                "qty": 1,
+                "rate": 70,
+                "amount": 70
+            },
+            {
+                "name": "MSL DOSA",
+                "qty": 1,
+                "rate": 80,
+                "amount": 80
+            },
+            {
+                "name": "ONION RAVA DOSA",
+                "qty": 2,
+                "rate": 80,
+                "amount": 160
+            },
+            {
+                "name": "CHEESE TOAST S/W",
+                "qty": 2,
+                "rate": 115,
+                "amount": 230
+            }
+        ],
+        "subtotal": 605.0,
+        "sgst_2_5": 15.12,
+        "cgst_2_5": 15.12,
+        "total": 635.0,
+        "currency": "INR"
+    },
+    "IN-1.jpg": {
+        "merchant_name": "Hardcastle Restaurants Pvt. Ltd.",
+        "company": "McDonald's Family Restaurant",
+        "order_no": "377",
+        "date": "05/03/2020",
+        "time": "10:47:08",
+        "items": [
+            {
+                "name": "2Pc Mc Classic Scramble Egg",
+                "amount": 130.48
+            },
+            {
+                "name": "Diff Conv. to Filter",
+                "amount": 48.56
+            }
+        ],
+        "subtotal": 179.04,
+        "cgst_2_5": 4.48,
+        "sgst_2_5": 4.48,
+        "total": 188.0,
+        "card_payment": 188.0,
+        "currency": "INR"
+    },
+    "Screenshot 2026-03-03 213334.png": {
+        "merchant_name": "Molecule Air Bar (A Unit of Manav Venture Pvt Ltd)",
+        "address": "Fatehabad Road, Agra",
+        "date": "28/10/2023",
+        "time": "20:34",
+        "items": [
+            {
+                "name": "Kamikaze",
+                "qty": 2,
+                "rate": 465.0,
+                "amount": 930.0
+            },
+            {
+                "name": "Corona Extra Pint",
+                "qty": 1,
+                "rate": 465.0,
+                "amount": 465.0
+            },
+            {
+                "name": "Veg Platter",
+                "qty": 1,
+                "rate": 995.0,
+                "amount": 995.0
+            },
+            {
+                "name": "Tandoori Paneer Tikka",
+                "qty": 4,
+                "rate": 365.0,
+                "amount": 1460.0
+            }
+        ],
+        "total": 5500.0,
+        "currency": "INR"
+    },
+    "Screenshot 2026-03-03 213435.png": {
+        "merchant_name": "Dublin Square (A Unit of Aqua Host Pvt. Ltd.)",
+        "address": "Rohini, New Delhi",
+        "date": "02/06/2018",
+        "time": "21:59",
+        "bill_no": "R003404",
+        "items": [
+            {
+                "name": "MALAI CHAP",
+                "amount": 329.0
+            },
+            {
+                "name": "DAL MAKHANI",
+                "amount": 329.0
+            },
+            {
+                "name": "PANEER BTR MASALA",
+                "amount": 349.0
+            },
+            {
+                "name": "BTR NAN",
+                "amount": 276.0
+            },
+            {
+                "name": "LACHA PRATHA",
+                "amount": 118.0
+            },
+            {
+                "name": "PINEAPPLE RITYA",
+                "amount": 278.0
+            },
+            {
+                "name": "BIRA STRONG",
+                "amount": 499.0
+            }
+        ],
+        "subtotal": 2178.0,
+        "total": 2598.0,
+        "currency": "INR"
+    },
+    "Screenshot 2026-03-03 213452.png": {
+        "merchant_name": "Yield Hospitality Private Limited (Bavala)",
+        "address": "Ahmedabad",
+        "date": "23/04/2024",
+        "bill_no": "10847",
+        "items": [
+            {
+                "name": "Pauva 100 Gm",
+                "qty": 2,
+                "amount": 80.0
+            },
+            {
+                "name": "Papdi",
+                "qty": 1,
+                "amount": 60.0
+            },
+            {
+                "name": "Fafda",
+                "qty": 1,
+                "amount": 60.0
+            },
+            {
+                "name": "Khman",
+                "qty": 1,
+                "amount": 50.0
+            },
+            {
+                "name": "Methi Na Gota",
+                "qty": 1,
+                "amount": 50.0
+            },
+            {
+                "name": "Bread Pakoda",
+                "qty": 1,
+                "amount": 50.0
+            },
+            {
+                "name": "Tea",
+                "qty": 5,
+                "amount": 150.0
+            }
+        ],
+        "total": 500.0,
+        "currency": "INR"
+    }
+}

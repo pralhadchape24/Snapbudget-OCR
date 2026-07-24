@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardTransaction"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingVertical="@dimen/spacing_3"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <!-- Category icon circle -->
+    <FrameLayout
+        android:id="@+id/categoryIconContainer"
+        android:layout_width="@dimen/icon_container_size"
+        android:layout_height="@dimen/icon_container_size"
+        android:layout_marginEnd="@dimen/spacing_3"
+        android:background="@drawable/bg_tx_icon">
+
+        <ImageView
+            android:id="@+id/ivCategoryIcon"
+            android:layout_width="@dimen/icon_size_sm"
+            android:layout_height="@dimen/icon_size_sm"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <!-- Name + category label -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvMerchant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.SnapBudget.BodyMedium"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="Organic Basket" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_0_5"
+            android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall"
+            tools:text="Grocery · just now" />
+    </LinearLayout>
+
+    <!-- Amount + category tag -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textAppearance="@style/TextAppearance.SnapBudget.BodyMedium"
+            android:textStyle="bold"
+            android:textColor="@color/danger"
+            tools:text="−₹518" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_0_5"
+            android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+            tools:text="FOOD" />
+    </LinearLayout>
+
+</LinearLayout>

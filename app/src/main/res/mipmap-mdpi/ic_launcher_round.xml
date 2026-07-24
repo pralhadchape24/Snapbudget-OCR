@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Background - dark circle -->
+    <path
+        android:fillColor="#0F1117"
+        android:pathData="M54,54m-54,0a54,54 0,1 1,108 0a54,54 0,1 1,-108 0" />
+
+    <!-- Outer brand ring -->
+    <path
+        android:strokeColor="#00D68F"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000"
+        android:pathData="M54,54m-46,0a46,46 0,1 1,92 0a46,46 0,1 1,-92 0" />
+
+    <!-- Scan corners -->
+    <path
+        android:strokeColor="#00D68F"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M32,38 L32,32 L38,32 M70,32 L76,32 L76,38 M76,70 L76,76 L70,76 M38,76 L32,76 L32,70" />
+
+    <!-- Receipt shape -->
+    <path
+        android:fillColor="#00D68F"
+        android:pathData="M40,44 L68,44 L68,72 L64,68 L60,72 L56,68 L52,72 L48,68 L44,72 Z" />
+
+    <!-- Receipt lines -->
+    <path
+        android:strokeColor="#0F1117"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M45,51 L63,51 M45,57 L61,57 M45,63 L58,63" />
+
+    <!-- Rupee symbol -->
+    <path
+        android:fillColor="#0F1117"
+        android:pathData="M50,49 L57,49 L54,53 C55,53 56,54 56,55 C56,57 55,58 53,58 L58,61 L56,61 L51,58 L51,56 L53,56 C54,56 54,56 54,55 C54,55 54,54 53,54 L50,54 Z" />
+
+</vector>

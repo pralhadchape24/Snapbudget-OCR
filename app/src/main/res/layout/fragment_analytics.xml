@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_base">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_5"
+        android:paddingTop="@dimen/spacing_5"
+        android:paddingBottom="@dimen/spacing_4">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nav_analytics"
+            android:textAppearance="@style/TextAppearance.SnapBudget.Headline2"
+            android:layout_marginBottom="@dimen/spacing_5"
+            android:accessibilityHeading="true" />
+
+        <!-- Empty State -->
+        <LinearLayout
+            android:id="@+id/layoutAnalyticsEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="@dimen/spacing_12"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
+                android:src="@drawable/ic_nav_analytics"
+                app:tint="@color/text_tertiary"
+                android:layout_marginBottom="@dimen/spacing_4"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_analytics"
+                android:textAppearance="@style/TextAppearance.SnapBudget.BodyMedium"
+                android:textColor="@color/text_secondary"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_analytics_hint"
+                android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall"
+                android:textColor="@color/text_tertiary"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/spacing_1" />
+        </LinearLayout>
+
+        <!-- Data Content -->
+        <LinearLayout
+            android:id="@+id/layoutAnalyticsContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- SPENDING TREND Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_4"
+                app:cardCornerRadius="@dimen/radius_xl"
+                app:cardElevation="@dimen/elevation_0"
+                app:cardBackgroundColor="@color/bg_surface"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="@dimen/elevation_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SPENDING TREND"
+                        android:textAppearance="@style/TextAppearance.SnapBudget.SectionHeader"
+                        android:layout_marginBottom="@dimen/spacing_3"
+                        android:accessibilityHeading="true" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_chart_height" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CATEGORY BREAKDOWN Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_4"
+                app:cardCornerRadius="@dimen/radius_xl"
+                app:cardElevation="@dimen/elevation_0"
+                app:cardBackgroundColor="@color/bg_surface"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="@dimen/elevation_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CATEGORY BREAKDOWN"
+                        android:textAppearance="@style/TextAppearance.SnapBudget.SectionHeader"
+                        android:layout_marginBottom="@dimen/spacing_3"
+                        android:accessibilityHeading="true" />
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pieChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/donut_chart_height" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CATEGORIES List -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CATEGORIES"
+                android:textAppearance="@style/TextAppearance.SnapBudget.SectionHeader"
+                android:layout_marginBottom="@dimen/spacing_3"
+                android:accessibilityHeading="true" />
+
+            <LinearLayout
+                android:id="@+id/layoutCategoryList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_6" />
+
+            <!-- TOP MERCHANTS -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOP MERCHANTS"
+                android:textAppearance="@style/TextAppearance.SnapBudget.SectionHeader"
+                android:layout_marginBottom="@dimen/spacing_3"
+                android:accessibilityHeading="true" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/radius_lg"
+                app:cardElevation="@dimen/elevation_0"
+                app:cardBackgroundColor="@color/bg_surface"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="@dimen/elevation_1">
+
+                <LinearLayout
+                    android:id="@+id/layoutMerchantList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

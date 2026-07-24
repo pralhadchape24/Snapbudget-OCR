@@ -1,0 +1,73 @@
+# SnapBudget OCR - C4 Component Architecture
+
+## Executive Summary
+SnapBudget OCR is an Android application designed to scan, parse, and categorize physical receipts into digital transactions. This documentation outlines the component-level architecture of the system, breaking down the monolithic App Container into logical components that handle UI, OCR processing, data matching, and persistence.
+
+## System Components
+
+### 1. UI Layer Component
+- **Description**: Handles user interactions, camera preview lifecycle, dashboard visualizations (pie charts), and displaying transaction history.
+- **Key Classes**: `MainActivity`, `CameraActivity`, `DashboardViewModel`, `TransactionAdapter`.
+- **Interfaces**: Observes data from the Data Access Layer, triggers actions in the OCR Engine.
+
+### 2. OCR Engine Component
+- **Description**: Core engine for image processing, text extraction, structural parsing, and fallback generative AI capabilities.
+- **Key Classes**: `DocumentScanner`, `ImagePreprocessor`, `OcrProcessor`, `ReceiptParser`, `GenerativeAiFallbackService`.
+- **Interfaces**: Receives camera frames, outputs structured receipt data.
+
+### 3. Matching & Categorization Component
+- **Description**: Analyzes raw extracted text to normalize data, match known merchants using fuzzy logic, assign spending categories, estimate confidence, and detect outliers.
+- **Key Classes**: `CategoryClassifier`, `ContextualAnalyzer`, `MerchantMatcher`, `SimilarityScorer`, `ConfidenceEstimator`.
+- **Interfaces**: Accepts parsed string data, outputs enriched `Transaction` models.
+
+### 4. Data Access Component
+- **Description**: Manages persistence of transaction data using Room database architecture and provides streams (Flow/LiveData) of data to the UI.
+- **Key Classes**: `AppDatabase`, `TransactionDao`, `TransactionRepository`.
+- **Interfaces**: Provides CRUD operations for the `Transaction` UI.
+
+---
+
+## Component Relationship Diagram
+
+```mermaid
+C4Component
+    title Component Diagram for SnapBudget OCR App Container
+
+    Container_Boundary(app, "SnapBudget Android App") {
+        Component(ui, "UI Layer", "Android UI/ViewModels", "Displays dashboard, handles camera preview, and renders transaction history.")
+        Component(ocr, "OCR Engine", "Kotlin Modules", "Scans document, pre-processes images, extracts text blocks, and parses receipts.")
+        Component(matching, "Matching & Categorization Engine", "Standard Kotlin", "Calculates confidence, parses categories, fuzzy-matches merchants, and normalizes text.")
+        ComponentDb(db, "Data Access Layer", "Room SQLite", "Persists localized transaction records and categories.")
+    }
+
+    System_Ext(cameraApi, "Android CameraX API", "Hardware Camera")
+    System_Ext(mlkit, "Google ML Kit", "On-device Vision/OCR API")
+    System_Ext(gemini, "Generative AI Service", "Cloud Fallback API")
+
+    Rel(ui, cameraApi, "Uses configured camera frame", "CameraX")
+    Rel(ui, ocr, "Initiates scanning & processing")
+    Rel(ui, db, "Observes transaction data streams")
+    
+    Rel(ocr, mlkit, "Processes image to text blocks")
+    Rel(ocr, gemini, "Uses for low-confidence fallback extraction")
+    Rel(ocr, matching, "Passes raw parsed fields for enrichment")
+    
+    Rel(matching, db, "Saves parsed and categorized transactions")
+```
+
+---
+
+## Core Component Details
+
+### OCR Engine Component
+- **DocumentScanner / ImagePreprocessor**: Leverages OpenCV or native image manipulation (like Canny edge detection, perspective transform) to crop the receipt from the background.
+- **ReceiptParser**: Implements rule-based extraction tailored for receipts (e.g., detecting dates, finding the largest currency amount as the total, isolating invoice numbers).
+
+### Matching & Categorization Component
+- **MerchantMatcher & SimilarityScorer**: Uses string metric algorithms (Levenshtein distance, etc.) to link fragmented OCR text to existing or known merchants.
+- **CategoryClassifier**: Uses keyword mappings to categorize the assigned merchant (e.g., categorizing "Organic Basket" as "Grocery" or "Food").
+- **ConfidenceEstimator**: Calculates an aggregate score defining how likely the parsed data is completely accurate. Triggers manual review flows if the score falls below a threshold.
+
+### Data Access Component
+- **TransactionRepository**: Single source of truth. Handles database insertion (via `TransactionDao`) and retrieves list records.
+- **Converters**: Type converters defined for Room to serialize/deserialize custom objects stored within the Transaction entities.

@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_base">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Review Transaction"
+            app:titleTextColor="@color/text_primary"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/bottom_nav_clearance"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_5">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/spacing_4"
+                android:visibility="gone" />
+
+            <!-- ── RECEIPT IMAGE ── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/receipt_image_height"
+                android:layout_marginBottom="@dimen/spacing_4"
+                app:cardCornerRadius="@dimen/radius_xl"
+                app:cardElevation="@dimen/elevation_0"
+                app:cardBackgroundColor="@color/bg_elevated"
+                app:strokeWidth="@dimen/elevation_1"
+                app:strokeColor="@color/border_subtle">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imgReceipt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        tools:src="@tools:sample/backgrounds/scenic" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_image_overlay" />
+
+                    <!-- OCR Confidence Chip -->
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipConfidence"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:layout_margin="@dimen/spacing_3"
+                        android:text="99.2% Match"
+                        app:chipBackgroundColor="@color/brand_subtle"
+                        app:chipStrokeWidth="1dp"
+                        app:chipStrokeColor="@color/brand"
+                        android:textColor="@color/brand"
+                        android:textSize="11sp"
+                        android:fontFamily="monospace" />
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── OCR WARNING BANNER (hidden by default) ── -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardOcrWarning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_4"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/radius_lg"
+                app:cardElevation="@dimen/elevation_0"
+                app:cardBackgroundColor="@color/warning_bg"
+                app:strokeColor="@color/warning"
+                app:strokeWidth="@dimen/elevation_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/spacing_4">
+
+                    <ImageView
+                        android:id="@+id/ivWarningIcon"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:src="@drawable/ic_receipt_long"
+                        app:tint="@color/warning"
+                        android:layout_marginEnd="@dimen/spacing_3"
+                        android:contentDescription="@string/ocr_low_confidence_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvOcrWarningTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ocr_low_confidence_title"
+                            android:textAppearance="@style/TextAppearance.SnapBudget.BodyMedium"
+                            android:textColor="@color/warning"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvOcrWarningMessage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ocr_low_confidence_message"
+                            android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="@dimen/spacing_0_5" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_4"
+                app:cardCornerRadius="@dimen/radius_lg"
+                app:cardElevation="@dimen/elevation_0"
+                app:cardBackgroundColor="@color/bg_elevated"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="@dimen/elevation_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EXTRACTED DATA"
+                        android:fontFamily="monospace"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="9sp"
+                        android:letterSpacing="0.16"
+                        android:layout_marginBottom="@dimen/spacing_3" />
+
+                    <!-- Amount field -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="@dimen/spacing_2_5"
+                        android:background="@drawable/bg_divider_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Amount"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:inputType="numberDecimal"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/brand"
+                            android:fontFamily="monospace"
+                            android:gravity="end"
+                            android:hint="₹ 0.00"
+                            android:textColorHint="@color/text_tertiary"
+                            android:nextFocusDown="@+id/edtMerchant" />
+                    </LinearLayout>
+
+                    <!-- Merchant field -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="@dimen/spacing_2_5"
+                        android:background="@drawable/bg_divider_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Merchant"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtMerchant"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:inputType="textCapWords"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_primary"
+                            android:gravity="end"
+                            android:hint="Store name"
+                            android:textColorHint="@color/text_tertiary"
+                            android:nextFocusUp="@+id/edtAmount"
+                            android:nextFocusDown="@+id/edtDate" />
+                    </LinearLayout>
+
+                    <!-- Date field -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="@dimen/spacing_2_5"
+                        android:background="@drawable/bg_divider_bottom">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Date"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:focusable="false"
+                            android:inputType="none"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_primary"
+                            android:fontFamily="monospace"
+                            android:hint="DD/MM/YYYY"
+                            android:textColorHint="@color/text_tertiary"
+                            android:contentDescription="Transaction date, tap to select"
+                            android:nextFocusUp="@+id/edtMerchant" />
+                    </LinearLayout>
+
+                    <!-- Category row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="@dimen/spacing_2_5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Category"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilCategory"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            app:boxCornerRadiusTopStart="@dimen/spacing_2_5"
+                            app:boxCornerRadiusTopEnd="@dimen/spacing_2_5"
+                            app:boxCornerRadiusBottomStart="@dimen/spacing_2_5"
+                            app:boxCornerRadiusBottomEnd="@dimen/spacing_2_5"
+                            app:boxStrokeColor="@color/border_soft"
+                            app:hintTextColor="@color/text_tertiary">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/spinnerCategory"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                android:textSize="12sp"
+                                android:textColor="@color/text_primary"
+                                android:padding="@dimen/spacing_2_5" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── LINE ITEMS SECTION (hidden when no items) ── -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardLineItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_4"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/radius_lg"
+                app:cardElevation="@dimen/elevation_0"
+                app:cardBackgroundColor="@color/bg_elevated"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="@dimen/elevation_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_4">
+
+                    <!-- Header row: ITEMS label + count badge -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/spacing_3">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ITEMS"
+                            android:fontFamily="monospace"
+                            android:textColor="@color/text_tertiary"
+                            android:textSize="9sp"
+                            android:letterSpacing="0.16" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipItemCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="@dimen/spacing_2"
+                            android:text="0"
+                            android:textSize="10sp"
+                            android:textColor="@color/brand"
+                            app:chipBackgroundColor="@color/brand_subtle"
+                            app:chipStrokeWidth="0dp"
+                            app:chipMinHeight="24dp"
+                            app:chipMinTouchTargetSize="24dp" />
+                    </LinearLayout>
+
+                    <!-- RecyclerView for line items -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvLineItems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never" />
+
+                    <!-- Subtotal footer -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/spacing_2"
+                        android:background="@color/border_subtle" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutItemsSubtotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingTop="@dimen/spacing_2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Items Subtotal"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvItemsSubtotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:fontFamily="monospace" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── GST / NOTES FIELD ── -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_2"
+                app:cardCornerRadius="@dimen/radius_lg"
+                app:cardElevation="@dimen/elevation_0"
+                app:cardBackgroundColor="@color/bg_elevated"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="@dimen/elevation_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/spacing_4">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="GST Number"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtGst"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:inputType="textCapCharacters"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="monospace"
+                        android:gravity="end"
+                        android:hint="Optional"
+                        android:textColorHint="@color/text_tertiary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ── RAW OCR TEXT (collapsible) ── -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShowRawOcr"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VIEW EXTRACTED TEXT"
+                android:textColor="@color/text_tertiary"
+                android:fontFamily="monospace"
+                android:letterSpacing="0.1"
+                android:textSize="10sp"
+                app:icon="@android:drawable/ic_menu_info_details"
+                app:iconTint="@color/text_tertiary" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRawOcr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_1"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/bg_overlay"
+                app:cardCornerRadius="@dimen/radius_lg"
+                app:cardElevation="@dimen/elevation_0"
+                app:strokeColor="@color/border_subtle"
+                app:strokeWidth="@dimen/elevation_1">
+
+                <TextView
+                    android:id="@+id/tvRawOcr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_4"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_tertiary"
+                    android:fontFamily="monospace"
+                    android:lineSpacingMultiplier="1.4"
+                    tools:text="Extracted text will appear here..." />
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ── BOTTOM ACTION BAR ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_4"
+        android:paddingBottom="@dimen/spacing_7"
+        android:background="@drawable/bg_bottom_bar">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRetake"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/spacing_2"
+            android:text="@string/retake"
+            android:textColor="@color/text_secondary"
+            app:strokeColor="@color/border_soft"
+            app:cornerRadius="@dimen/radius_full" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Confirm &amp; Save"
+            android:textColor="@color/on_brand"
+            android:textStyle="bold"
+            app:backgroundTint="@color/brand"
+            app:cornerRadius="@dimen/radius_full" />
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

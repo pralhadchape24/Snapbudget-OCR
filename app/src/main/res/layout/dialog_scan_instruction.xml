@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_5">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="How to scan a receipt"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="@dimen/spacing_3" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. Place the receipt on a dark, flat surface.\n2. Ensure good lighting without harsh shadows.\n3. Align the edges of the receipt inside the green frame.\n4. Hold the camera steady.\nThe app will automatically detect and capture the receipt."
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_marginBottom="@dimen/spacing_5" />
+
+    <CheckBox
+        android:id="@+id/cbDoNotShowAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do not show again"
+        android:textColor="@color/text_secondary"
+        android:buttonTint="@color/brand" />
+
+</LinearLayout>

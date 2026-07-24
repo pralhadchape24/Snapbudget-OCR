@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SnapBudget OCR</string>
+    <string name="scan_receipt">Scan Receipt</string>
+    <string name="monthly_total">Monthly Total</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="view_all">View All</string>
+    <string name="category_breakdown">Category Breakdown</string>
+    <string name="merchant">Merchant</string>
+    <string name="amount">Amount</string>
+    <string name="date">Date</string>
+    <string name="category">Category</string>
+    <string name="gst_number">GST Number</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="retake">Retake</string>
+    <string name="confirm">Confirm</string>
+    <string name="delete">Delete</string>
+    <string name="search">Search</string>
+    <string name="history">History</string>
+    <string name="settings">Settings</string>
+    <string name="no_transactions">No transactions yet. Tap + to add your first receipt!</string>
+    <string name="raw_ocr">Raw OCR Text</string>
+    <string name="confidence">Confidence Score</string>
+    <string name="filters">Filters</string>
+    <string name="all_categories">All Categories</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="clear_filters">Clear Filters</string>
+    <string name="add_manually">Add Manually</string>
+    <string name="capture_receipt">Capture Receipt</string>
+    <string name="gallery">Gallery</string>
+    <string name="flash">Flash</string>
+    <string name="close">Close</string>
+    <string name="total_amount">Total: ₹%1$.2f</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_scan">Scan</string>
+    <string name="nav_wallet">Wallet</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Content Descriptions -->
+    <string name="nav_home_desc">Home dashboard</string>
+    <string name="nav_analytics_desc">Spending analytics and charts</string>
+    <string name="nav_scan_desc">Scan a receipt</string>
+    <string name="nav_wallet_desc">Manage monthly budgets</string>
+    <string name="nav_profile_desc">Settings and profile</string>
+    <string name="notifications">Notifications</string>
+
+    <!-- Empty States -->
+    <string name="empty_transactions">No transactions yet</string>
+    <string name="empty_transactions_hint">Tap the camera button below to scan your first receipt</string>
+    <string name="empty_analytics">No spending data yet</string>
+    <string name="empty_analytics_hint">Start scanning receipts to see your spending analytics here</string>
+    <string name="empty_wallet">No budget set yet</string>
+    <string name="empty_wallet_hint">Set a monthly budget to track your spending against limits</string>
+    <string name="empty_wallet_btn">Set Monthly Budget</string>
+
+    <!-- OCR Error States -->
+    <string name="ocr_failed_title">Manual Entry Required</string>
+    <string name="ocr_failed_message">We couldn\'t read this receipt clearly. Please enter the details manually.</string>
+    <string name="ocr_low_confidence_title">Low Confidence Extraction</string>
+    <string name="ocr_low_confidence_message">Some fields may be incorrect. Please verify before saving.</string>
+
+    <!-- Wallet -->
+    <string name="wallet_spent">spent</string>
+    <string name="wallet_remaining">remaining</string>
+    <string name="wallet_over_budget">OVER BUDGET</string>
+    <string name="monthly_budget">Monthly Budget</string>
+    <string name="income">Income</string>
+    <string name="balance">Balance</string>
+
+    <!-- Budget Dialog -->
+    <string name="dialog_budget_title">Set Monthly Budget</string>
+    <string name="dialog_budget_subtitle">Define your monthly spending limit to stay on track</string>
+    <string name="dialog_budget_label">BUDGET AMOUNT</string>
+    <string name="dialog_budget_hint">Enter amount</string>
+    <string name="dialog_budget_save">Save Budget</string>
+
+    <!-- Manual Bill Dialog -->
+    <string name="dialog_manual_title">Add Bill</string>
+    <string name="dialog_manual_subtitle">Enter your expense details manually</string>
+    <string name="dialog_manual_merchant_label">MERCHANT / DESCRIPTION</string>
+    <string name="dialog_manual_merchant_hint">e.g. Electricity Bill, Rent</string>
+    <string name="dialog_manual_amount_label">AMOUNT</string>
+    <string name="dialog_manual_amount_hint">0.00</string>
+    <string name="dialog_manual_category_label">CATEGORY</string>
+    <string name="dialog_manual_date_label">DATE</string>
+    <string name="dialog_manual_date_hint">Tap to select date</string>
+    <string name="dialog_manual_notes_label">NOTES (OPTIONAL)</string>
+    <string name="dialog_manual_notes_hint">Add any notes…</string>
+    <string name="dialog_manual_save">Save Bill</string>
+    <string name="fab_add_bill">Add Bill</string>
+
+    <!-- Login -->
+    <string name="login_title">Welcome Back</string>
+    <string name="login_subtitle">Securely access your budget and transactions</string>
+    <string name="email_hint">Email address</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="or_continue_with">Or continue with</string>
+</resources>

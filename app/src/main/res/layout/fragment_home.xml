@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:background="@color/bg_base">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/spacing_5"
+        android:paddingTop="@dimen/spacing_5"
+        android:paddingBottom="@dimen/spacing_4">
+
+        <!-- ── GREETING HEADER ── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_5">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Good morning,"
+                    android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall" />
+
+                <TextView
+                    android:id="@+id/tvAppName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SnapBudget"
+                    android:textAppearance="@style/TextAppearance.SnapBudget.Headline2"
+                    android:layout_marginTop="@dimen/spacing_0_5" />
+            </LinearLayout>
+
+            <!-- Notification Bell -->
+            <ImageButton
+                android:id="@+id/btnNotifications"
+                android:layout_width="@dimen/touch_target_min"
+                android:layout_height="@dimen/touch_target_min"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_bell"
+                app:tint="@color/text_secondary"
+                android:contentDescription="@string/notifications" />
+        </LinearLayout>
+
+        <!-- ── BALANCE / SPENDING CARD with Income/Expense Chips ── -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardMonthlyTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_6"
+            app:cardCornerRadius="@dimen/radius_xl"
+            app:cardElevation="@dimen/elevation_0"
+            app:cardBackgroundColor="@color/bg_monthly_card"
+            app:strokeColor="@color/brand_alpha_20"
+            app:strokeWidth="@dimen/elevation_1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_5">
+
+                <!-- Label + Month Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="MONTHLY SPENDING"
+                        android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+                        android:textColor="@color/brand_alpha_70" />
+
+                    <TextView
+                        android:id="@+id/tvCurrentMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="March 2026"
+                        android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall" />
+                </LinearLayout>
+
+                <!-- Income / Spent Chips Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/spacing_3"
+                    android:baselineAligned="false">
+
+                    <!-- Income Chip -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/spacing_2"
+                        app:cardCornerRadius="@dimen/radius_md"
+                        app:cardElevation="@dimen/elevation_0"
+                        app:cardBackgroundColor="@color/positive_bg"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_3">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="INCOME"
+                                android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+                                android:textColor="@color/positive" />
+
+                            <TextView
+                                android:id="@+id/tvIncome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+0"
+                                android:textAppearance="@style/TextAppearance.SnapBudget.ChipLabel"
+                                android:textColor="@color/positive"
+                                android:textStyle="bold"
+                                android:layout_marginTop="@dimen/spacing_0_5" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Spent Chip -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/spacing_2"
+                        app:cardCornerRadius="@dimen/radius_md"
+                        app:cardElevation="@dimen/elevation_0"
+                        app:cardBackgroundColor="@color/danger_bg"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="@dimen/spacing_3">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="SPENT"
+                                android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+                                android:textColor="@color/danger" />
+
+                            <TextView
+                                android:id="@+id/tvMonthlyTotal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-0"
+                                android:textAppearance="@style/TextAppearance.SnapBudget.ChipLabel"
+                                android:textColor="@color/danger"
+                                android:textStyle="bold"
+                                android:layout_marginTop="@dimen/spacing_0_5" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- Balance Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BALANCE"
+                    android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+                    android:textColor="@color/brand_alpha_70"
+                    android:layout_marginTop="@dimen/spacing_4" />
+
+                <!-- Big Balance Amount -->
+                <TextView
+                    android:id="@+id/tvBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_1"
+                    android:text="0"
+                    android:textAppearance="@style/TextAppearance.SnapBudget.Headline1" />
+
+                <!-- Budget progress bar + percentage -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/spacing_4">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/progress_bar_height"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_progress_track"
+                        android:layout_marginEnd="@dimen/spacing_3">
+
+                        <View
+                            android:id="@+id/progressBudget"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:background="@drawable/bg_progress_fill" />
+
+                        <View
+                            android:id="@+id/progressBudgetRemaining"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="100" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvBudgetPercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall"
+                        android:accessibilityLiveRegion="polite" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ── RECENT TRANSACTIONS HEADER ── -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_3">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="RECENT TRANSACTIONS"
+                android:textAppearance="@style/TextAppearance.SnapBudget.SectionHeader"
+                android:accessibilityHeading="true" />
+
+            <TextView
+                android:id="@+id/tvViewAll"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/touch_target_min"
+                android:gravity="center"
+                android:text="View all"
+                android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall"
+                android:textColor="@color/brand"
+                android:textStyle="bold"
+                android:paddingHorizontal="@dimen/spacing_1"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+
+        <!-- ── TRANSACTION LIST / EMPTY STATE ── -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_2">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <!-- Empty State -->
+            <LinearLayout
+                android:id="@+id/layoutEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="@dimen/spacing_12"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/touch_target_min"
+                    android:layout_height="@dimen/touch_target_min"
+                    android:src="@drawable/ic_receipt_long"
+                    app:tint="@color/text_tertiary"
+                    android:layout_marginBottom="@dimen/spacing_4"
+                    android:importantForAccessibility="no" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty_transactions"
+                    android:textAppearance="@style/TextAppearance.SnapBudget.BodyMedium"
+                    android:textColor="@color/text_secondary"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty_transactions_hint"
+                    android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall"
+                    android:textColor="@color/text_tertiary"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/spacing_1" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerRecentTransactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_transaction" />
+        </FrameLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

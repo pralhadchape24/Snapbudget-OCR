@@ -1,0 +1,45 @@
+# Production Audit Report
+
+**Project:** SnapBudget OCR
+**Date:** 2026-03-04
+**Overall Grade:** C
+
+## Executive Summary
+SnapBudget OCR has a functional pipeline but suffers from "God Class" architecture, tight coupling, UI thread blocking risks, and potential memory leaks with `LiveData` anti-patterns. The Gemini AI implementation is deeply intertwined with business logic, and security practices around API keys need improvement. 
+
+**Critical Issues:** 3
+**High Priority:** 4
+**Performance Issues:** 3
+**Recommendation:** Refactor within the next 2 weeks to stabilize performance and architecture before scaling.
+
+---
+
+## Findings by Category
+
+### Architecture (Grade: D)
+- **Tight Coupling in [ReceiptProcessor](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptProcessor.kt#19-379):** This class handles OCR invocation, validation, duplicate detection, and direct networking/LLM invocation with Gemini. It violates the Single Responsibility Principle.
+- **God Class ([ReceiptParser](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptParser.kt#23-892)):** At 891 lines, it handles parsing dates, amounts, layout bounding, string tokenization, and category mapping. 
+- **Missing Dependency Injection:** Dependencies like `CategoryClassifier`, [TransactionDao](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/data/db/TransactionDao.kt#8-57), and [ReceiptParser](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptParser.kt#23-892) are manually instantiated or passed around ad-hoc, making unit testing extremely difficult.
+
+### Performance (Grade: C)
+- **Regex Compilation in Loops:** [ReceiptParser](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptParser.kt#23-892) re-compiles `Regex` patterns inside [for](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/DocumentScanner.kt#195-254) loops parsing each line of the receipt (e.g., address matchers, GST matchers). This allocates objects and slows down the CPU on every scan.
+- **Potential UI Thread Blocking:** [TransactionRepository](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/data/repository/TransactionRepository.kt#8-75) contains helper methods like [getTotalExpensesForMonth](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/data/repository/TransactionRepository.kt#44-56) which construct `Calendar` instances and perform DB operations without switching to `Dispatchers.IO`. While Room suspends correctly, the surrounding logic in the ViewModel scope remains on `Dispatchers.Main`.
+- **Bitmap Memory Management:** [DocumentScanner](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/DocumentScanner.kt#24-281) does a good job releasing most OpenCV Mats, but large Bitmaps passed to [OcrProcessor](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/OcrProcessor.kt#14-80) are processed recursively without downscaling checks in some flows.
+
+### Code Quality & Bad Practices (Grade: C)
+- **`LiveData` Anti-Pattern in [DashboardViewModel](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ui/dashboard/DashboardViewModel.kt#15-119):** Observing a `LiveData` source by calling `observeForever` and manually removing it in [onCleared](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ui/dashboard/DashboardViewModel.kt#103-108) is an anti-pattern. This risks memory leaks and defeats lifecycle-awareness.
+- **In-line JSON Parsing:** Manual `JSONObject` parsing of LLM outputs inside [ReceiptProcessor](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptProcessor.kt#19-379) is brittle and prone to JSONException crashes.
+- **Magic Numbers:** Hardcoded confidence thresholds (`0.6f`, `0.65f`) and scoring deductions sprinkled inline across the parser logic.
+
+### Security (Grade: D)
+- **Insecure API Key Storage:** The Gemini API key is extracted dynamically from `strings.xml`. Hardcoding API keys in Android string resources exposes them to trivial decompilation.
+- **PII Logging:** Raw OCR text and complete stack traces are heavily logged via `Log.d` and `Log.e`. This can leak User Personally Identifiable Information (PII) to logcat.
+
+---
+
+## Priority Actions & Refactoring Plan
+
+1. **[Critical] Fix `LiveData` Memory Leaks:** Refactor [DashboardViewModel](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ui/dashboard/DashboardViewModel.kt#15-119) to use `Transformations` (or equivalent Kotlin flow maps) instead of manual `observeForever()` tracking.
+2. **[Critical] Decouple Gemini AI:** Extract the Gemini generative model logic from [ReceiptProcessor](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptProcessor.kt#19-379) into a dedicated `GenerativeAiService` interface to restore single-responsibility.
+3. **[Critical] Coroutine Dispatchers:** Inject and utilize `Dispatchers.IO` for all [TransactionRepository](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/data/repository/TransactionRepository.kt#8-75) and [DashboardViewModel](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ui/dashboard/DashboardViewModel.kt#15-119) data fetching logic.
+4. **[High] Pre-compile Regex Patterns:** Move all inline `Regex()` calls in [ReceiptParser](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptParser.kt#23-892) to `companion object` or class-level [val](file:///c:/Users/patil/AndroidStudioProjects/TEST/app/src/main/java/com/snapbudget/ocr/ocr/ReceiptProcessor.kt#315-365) properties.

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog"
+    android:paddingTop="@dimen/spacing_3"
+    android:paddingBottom="@dimen/spacing_6"
+    android:paddingHorizontal="@dimen/spacing_6">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_dialog_handle"
+        android:layout_marginBottom="@dimen/spacing_5" />
+
+    <!-- Icon Header -->
+    <FrameLayout
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_icon_brand"
+        android:layout_marginBottom="@dimen/spacing_4">
+
+        <ImageView
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_nav_wallet"
+            app:tint="@color/brand"
+            android:importantForAccessibility="no" />
+    </FrameLayout>
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/dialog_budget_title"
+        android:textAppearance="@style/TextAppearance.SnapBudget.Headline2"
+        android:layout_marginBottom="@dimen/spacing_1" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/dialog_budget_subtitle"
+        android:textAppearance="@style/TextAppearance.SnapBudget.BodySmall"
+        android:textColor="@color/text_tertiary"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_6" />
+
+    <!-- Amount Input Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_budget_label"
+        android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+        android:layout_marginBottom="@dimen/spacing_2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_input_field"
+        android:paddingHorizontal="@dimen/spacing_4"
+        android:layout_marginBottom="@dimen/spacing_4">
+
+        <!-- Currency Symbol -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹"
+            android:textSize="22sp"
+            android:textColor="@color/brand"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:layout_marginEnd="@dimen/spacing_2" />
+
+        <EditText
+            android:id="@+id/etBudgetAmount"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/list_item_min_height"
+            android:layout_weight="1"
+            android:inputType="numberDecimal"
+            android:hint="@string/dialog_budget_hint"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary"
+            android:textSize="20sp"
+            android:fontFamily="monospace"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:imeOptions="actionDone" />
+    </LinearLayout>
+
+    <!-- Quick Amount Chips -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_6">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chip5k"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/icon_container_size"
+            android:layout_weight="1"
+            android:text="₹5K"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            app:strokeColor="@color/border_soft"
+            app:cornerRadius="@dimen/radius_md"
+            android:layout_marginEnd="@dimen/spacing_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chip10k"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/icon_container_size"
+            android:layout_weight="1"
+            android:text="₹10K"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            app:strokeColor="@color/border_soft"
+            app:cornerRadius="@dimen/radius_md"
+            android:layout_marginEnd="@dimen/spacing_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chip20k"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/icon_container_size"
+            android:layout_weight="1"
+            android:text="₹20K"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            app:strokeColor="@color/border_soft"
+            app:cornerRadius="@dimen/radius_md"
+            android:layout_marginEnd="@dimen/spacing_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chip50k"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/icon_container_size"
+            android:layout_weight="1"
+            android:text="₹50K"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            app:strokeColor="@color/border_soft"
+            app:cornerRadius="@dimen/radius_md" />
+    </LinearLayout>
+
+    <!-- Save Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSaveBudget"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/dialog_budget_save"
+        android:textColor="@color/on_brand"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        app:backgroundTint="@color/brand"
+        app:cornerRadius="@dimen/radius_lg"
+        android:layout_marginBottom="@dimen/spacing_3" />
+
+    <!-- Cancel Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancelBudget"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/cancel"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        app:cornerRadius="@dimen/radius_lg" />
+
+</LinearLayout>

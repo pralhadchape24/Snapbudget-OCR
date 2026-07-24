@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing Tokens -->
+    <dimen name="spacing_0_5">2dp</dimen>
+    <dimen name="spacing_1">4dp</dimen>
+    <dimen name="spacing_1_5">6dp</dimen>
+    <dimen name="spacing_2">8dp</dimen>
+    <dimen name="spacing_2_5">10dp</dimen>
+    <dimen name="spacing_3">12dp</dimen>
+    <dimen name="spacing_3_5">14dp</dimen>
+    <dimen name="spacing_4">16dp</dimen>
+    <dimen name="spacing_5">20dp</dimen>
+    <dimen name="spacing_6">24dp</dimen>
+    <dimen name="spacing_7">28dp</dimen>
+    <dimen name="spacing_8">32dp</dimen>
+    <dimen name="spacing_10">40dp</dimen>
+    <dimen name="spacing_12">48dp</dimen>
+    <dimen name="spacing_13">52dp</dimen>
+
+    <!-- Radius Tokens -->
+    <dimen name="radius_sm">4dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_lg">14dp</dimen>
+    <dimen name="radius_xl">20dp</dimen>
+    <dimen name="radius_full">100dp</dimen>
+
+    <!-- Core component sizes -->
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="icon_size_sm">18dp</dimen>
+    <dimen name="icon_container_size">36dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="chart_height">250dp</dimen>
+    <dimen name="receipt_image_height">200dp</dimen>
+    <dimen name="progress_bar_height">5dp</dimen>
+
+    <!-- Bottom Navigation -->
+    <dimen name="bottom_nav_height">64dp</dimen>
+    <dimen name="bottom_nav_clearance">80dp</dimen>
+
+    <!-- Touch targets (WCAG 2.5.5) -->
+    <dimen name="touch_target_min">48dp</dimen>
+
+    <!-- List & Grid -->
+    <dimen name="list_item_min_height">56dp</dimen>
+    <dimen name="grid_gap">12dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_0">0dp</dimen>
+    <dimen name="elevation_1">1dp</dimen>
+    <dimen name="elevation_2">3dp</dimen>
+    <dimen name="elevation_3">6dp</dimen>
+
+    <!-- Charts -->
+    <dimen name="line_chart_height">200dp</dimen>
+    <dimen name="donut_chart_height">240dp</dimen>
+
+    <!-- Center nav icon -->
+    <dimen name="center_nav_icon">32dp</dimen>
+</resources>

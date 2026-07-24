@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_abyss">
+
+    <!-- Camera preview — full screen -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Dim overlay outside scan frame -->
+    <View
+        android:id="@+id/overlayTop"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bg_abyss_alpha_60"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/scanFrameContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/overlayBottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bg_abyss_alpha_60"
+        app:layout_constraintTop_toBottomOf="@id/scanFrameContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- The scan frame area with corners -->
+    <FrameLayout
+        android:id="@+id/scanFrameContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/spacing_10"
+        app:layout_constraintTop_toBottomOf="@id/cameraTopBar"
+        app:layout_constraintBottom_toTopOf="@id/tvInstruction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Scanning line (animates in code) -->
+        <View
+            android:id="@+id/scanLine"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_0_5"
+            android:layout_gravity="top"
+            android:layout_marginHorizontal="@dimen/spacing_4"
+            android:background="@drawable/bg_scan_line_brand"
+            android:alpha="0.9" />
+
+        <!-- TL corner -->
+        <View android:layout_width="@dimen/spacing_7" android:layout_height="@dimen/spacing_7"
+            android:layout_gravity="top|start"
+            android:background="@drawable/corner_tl" />
+        <!-- TR corner -->
+        <View android:layout_width="@dimen/spacing_7" android:layout_height="@dimen/spacing_7"
+            android:layout_gravity="top|end"
+            android:background="@drawable/corner_tr" />
+        <!-- BL corner -->
+        <View android:layout_width="@dimen/spacing_7" android:layout_height="@dimen/spacing_7"
+            android:layout_gravity="bottom|start"
+            android:background="@drawable/corner_bl" />
+        <!-- BR corner -->
+        <View android:layout_width="@dimen/spacing_7" android:layout_height="@dimen/spacing_7"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/corner_br" />
+    </FrameLayout>
+
+    <!-- Top toolbar: close + title + flash -->
+    <LinearLayout
+        android:id="@+id/cameraTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="@dimen/spacing_4"
+        android:paddingTop="@dimen/spacing_10"
+        android:background="@color/bg_abyss_alpha_40"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="@drawable/bg_camera_button"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@color/text_primary"
+            android:contentDescription="@string/close" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Scan Receipt"
+            android:textAppearance="@style/TextAppearance.SnapBudget.TitleText" />
+
+        <ImageButton
+            android:id="@+id/btnFlash"
+            android:layout_width="@dimen/touch_target_min"
+            android:layout_height="@dimen/touch_target_min"
+            android:background="@drawable/bg_camera_button"
+            android:src="@drawable/ic_flash_off"
+            app:tint="@color/text_primary"
+            android:contentDescription="@string/flash" />
+    </LinearLayout>
+
+    <!-- Instruction below viewfinder -->
+    <TextView
+        android:id="@+id/tvInstruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Align receipt within the frame"
+        android:textAppearance="@style/TextAppearance.SnapBudget.BodyMedium"
+        android:textColor="@color/text_secondary"
+        android:paddingHorizontal="@dimen/spacing_6"
+        android:paddingVertical="@dimen/spacing_4"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/spacing_1"
+        app:layout_constraintTop_toBottomOf="@id/scanFrameContainer"
+        app:layout_constraintBottom_toTopOf="@id/tvOcrStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- OCR Status indicator -->
+    <TextView
+        android:id="@+id/tvOcrStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="● OCR READY"
+        android:textAppearance="@style/TextAppearance.SnapBudget.LabelSmall"
+        android:textColor="@color/brand"
+        android:layout_marginBottom="@dimen/spacing_2"
+        app:layout_constraintTop_toBottomOf="@id/tvInstruction"
+        app:layout_constraintBottom_toTopOf="@id/captureControls"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottom controls -->
+    <LinearLayout
+        android:id="@+id/captureControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/spacing_12"
+        android:paddingTop="@dimen/spacing_5"
+        android:paddingHorizontal="@dimen/spacing_8"
+        android:background="@drawable/bg_camera_bottom_gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Gallery button -->
+        <ImageButton
+            android:id="@+id/btnGallery"
+            android:layout_width="@dimen/spacing_13"
+            android:layout_height="@dimen/spacing_13"
+            android:background="@drawable/bg_camera_button"
+            android:src="@android:drawable/ic_menu_gallery"
+            app:tint="@color/text_primary"
+            android:contentDescription="@string/gallery" />
+
+        <!-- Spacer -->
+        <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+
+        <!-- Capture FAB — brand colored -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabCustomSize="72dp"
+            app:maxImageSize="30dp"
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            app:backgroundTint="@color/brand"
+            app:tint="@color/on_brand"
+            android:contentDescription="@string/capture_receipt" />
+
+        <!-- Spacer -->
+        <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+
+        <!-- Placeholder to balance layout -->
+        <View android:layout_width="@dimen/spacing_13" android:layout_height="@dimen/spacing_13" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
